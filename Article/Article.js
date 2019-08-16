@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: "Lambda Students: Be The Standard",
+    date: "August 13, 2019",
+    firstParagraph: '',
+    secondParagraph: '',
+    thirdParagraph: ''
   }
 ];
 
@@ -100,7 +107,7 @@ const data = [
   </div>
 
   Hint: You will need to use createElement more than once here!
-
+  
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each peice of the data object above.
 
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
@@ -112,3 +119,83 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
 
 */
+const artDiv = document.querySelector('.articles');
+
+/* Create New Function */
+function articleCreator(articleObj) {
+
+  // Create Elements of Article
+  const newDiv = document.createElement('div');
+  const title = document.createElement('h2');
+  const datePub = document.createElement('p');
+  const para1 = document.createElement('p');
+  const para2 = document.createElement('p');
+  const para3 = document.createElement('p');
+  const newSpan = document.createElement('span');
+
+  //Make classes
+  newDiv.classList.add('article');
+  datePub.classList.add('date');
+  newSpan.classList.add('expandButton');
+
+  //make declarations
+  title.textContent = articleObj.title;
+  datePub.textContent = articleObj.date;
+  para1.textContent = articleObj.firstParagraph;
+  para2.textContent = articleObj.secondParagraph;
+  para3.textContent = articleObj.thirdParagraph;
+
+  //Add Event listeners
+  newSpan.addEventListener('click',(event) => {
+    newDiv.classList.toggle('article-open');
+      
+  });
+  newDiv.addEventListener('click',(event) => newDiv.classList.toggle('article-open'));
+
+newDiv.appendChild(title);  
+newDiv.appendChild(datePub);  
+newDiv.appendChild(para1);  
+newDiv.appendChild(para2);  
+newDiv.appendChild(para3);  
+newDiv.appendChild(newSpan);  
+ 
+console.log(newDiv);
+
+  /*const newArticle = {
+    "title": title,
+    "datePublished": datePub,
+    "paragraph1": para1,
+    "paragraph2": para2,
+    "paragraph3": para3,
+    "toggleClass": newSpan
+  }
+*/
+
+  return  newDiv;
+
+
+}
+
+
+console.log(artDiv);
+
+// convert data to components
+const newArticles = data.map(article => articleCreator(article));
+console.log(newArticles);
+
+
+
+  //Append parts to Div
+
+/*newArticles.forEach( (article) => {
+  artDiv.appendChild(article.title);
+  artDiv.appendChild(article.datePublished);
+  artDiv.appendChild(article.paragraph1);
+  artDiv.appendChild(article.paragraph2);
+  artDiv.appendChild(article.paragraph3);
+  artDiv.appendChild(article.toggleClass);
+})*/
+
+newArticles.forEach( article => artDiv.appendChild(article));
+  
+ 
